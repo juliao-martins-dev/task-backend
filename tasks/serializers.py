@@ -1,7 +1,29 @@
 from django.contrib.auth.models import User
 from .models import Task
-
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
+
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        token["id"] = user.id
+        token["username"] = user.username
+        token["email"] = user.email
+
+        return token
+    
+    # def validate(self, attrs):
+    #     data = super().validate(attrs)
+
+    #     data["id"] = self.user.id
+    #     data["username"] = self.user.username
+    #     data["email"] = self.user.email
+
+    #     return data
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

@@ -4,6 +4,11 @@ from django.contrib.auth.models import User
 from .models import Task
 from .serializers import UserSerializer, TaskSerializer
 from .permissions import IsOwnerOrReadOnly
+from rest_framework_simplejwt.views import TokenObtainPairView
+from .serializers import CustomTokenObtainPairSerializer
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):

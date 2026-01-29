@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'tasks',
     'drf_redesign',
     'rest_framework',
+    'rest_framework_simplejwt',
     'corsheaders',
 ]
 
