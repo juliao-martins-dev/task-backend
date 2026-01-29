@@ -16,14 +16,22 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         return token
     
-    # def validate(self, attrs):
-    #     data = super().validate(attrs)
+    def validate(self, attrs):
+        data = super().validate(attrs)
 
-    #     data["id"] = self.user.id
-    #     data["username"] = self.user.username
-    #     data["email"] = self.user.email
+        # data["id"] = self.user.id
+        # data["username"] = self.user.username
+        # data["email"] = self.user.email
 
-    #     return data
+        user = {
+            "id": self.user.id,
+            "username": self.user.username,
+            "email": self.user.email
+        }
+
+        data["user"] = user
+
+        return data
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
